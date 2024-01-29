@@ -16,7 +16,7 @@ function Signup() {
         axios.post(url, data)
             .then((res) => {
                 console.log(res.data)
-                if (res.data.message){
+                if (res.data.message) {
                     alert(res.data.message)
                 }
             })

@@ -1,23 +1,39 @@
+import axios from "axios";
 import Header from "./Header";
 import { useEffect } from "react";
 import { useNavigate, Link } from 'react-router-dom';
+import { useState } from "react";
 
 
-
-function Home(){
+function Home() {
     const navigate = useNavigate()
-    useEffect(()=>{
-if(!localStorage.getItem('token')){
-    navigate('/login')
-}
-    },[])
-    return(
-        <div>
-            <Header/>   
-            <Link to="/add-product">Add PRODUCT</Link>
-            Welcome to home ....
-        </div>
-    )
-}
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            navigate('/login')
+        }
+    }, [])
+
+
+    useEffect(() => {
+        const url = 'http://localhost:4000/get-products';
+        axios.get(url)
+            .then((res) => {
+                console.log(res);
+                if (res.data.products) {
+                    setProducts(res.data.products)
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                alert('Server err')
+            })
+    }, [])
+    console.log(products);
+
+    return ({
+
+    }
 
 export default Home;

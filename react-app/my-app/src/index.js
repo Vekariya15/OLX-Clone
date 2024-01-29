@@ -37,6 +37,7 @@ const router = createBrowserRouter([
     path: "/add-product",
     element: <AddProduct />,
   },
+  
 ]);
 
 createRoot(document.getElementById("root")).render(
